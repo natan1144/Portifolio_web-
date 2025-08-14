@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Natan Henrique – Currículo Web</title>
+  <meta name="description" content="Currículo web de Natan Henrique – Desenvolvimento de Sistemas, Engenharia de Software e IA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#111827;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --accent:#22c55e;
+      --accent-2:#38bdf8;
+      --chip:#1f2937;
+      --border:#1f2937;
+      --shadow:0 10px 30px rgba(0,0,0,.3);
+    }
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--text);} 
+    a{color:var(--accent-2); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .brand{display:flex;gap:16px;align-items:center}
+    .avatar{width:72px;height:72px;border-radius:18px;background:linear-gradient(145deg,#1e293b,#0b1222);display:grid;place-items:center;color:#a5b4fc;font-weight:800;box-shadow:var(--shadow);transition:transform 0.3s cubic-bezier(.4,0,.2,1),box-shadow 0.3s}
+    .avatar:hover{transform:scale(1.12);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:#0b1222}
+    .btn{cursor:pointer; padding:10px 14px;border-radius:12px;border:1px solid var(--border); background:#0b1222;color:var(--text);display:inline-flex;align-items:center;gap:8px}
+    .btn:hover{filter:brightness(1.1)}
+    .grid{display:grid; gap:18px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    h1{font-size:28px;margin:0 0 4px 0}
+    h2{font-size:22px;margin:0 0 10px 0}
+    h3{font-size:16px;margin:14px 0 8px}
+    p{color:var(--text);opacity:.95;line-height:1.6}
+    .muted{color:var(--muted)}
+    .title{font-weight:800; letter-spacing:.2px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px}
+    .bar{height:8px;background:#0b1222;border:1px solid var(--border);border-radius:999px;overflow:hidden}
+    .bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0}
+    .section{scroll-margin-top:100px}
+    .links{display:flex;flex-wrap:wrap;gap:10px}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#0b1222;border:1px solid var(--border);border-radius:8px;padding:4px 8px;color:var(--muted)}
+    .tag{display:inline-flex;align-items:center;gap:8px}
+    .tag .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .timeline{position:relative;padding-left:22px}
+    .timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:#1f2937}
+    .timeline .item{position:relative;margin-bottom:14px}
+    .timeline .item:before{content:"";position:absolute;left:-14px;top:6px;width:10px;height:10px;border-radius:999px;background:var(--accent)}
+    .accordion summary{cursor:pointer;list-style:none}
+    .accordion summary::-webkit-details-marker{display:none}
+    footer{margin:30px 0;color:var(--muted);text-align:center}
+    .pill{border:1px solid var(--border);background:#0b1222;padding:6px 10px;border-radius:999px;}
+    /* Carrossel */
+    .carousel{position:relative;max-width:600px;margin:18px auto 0;overflow:hidden;border-radius:10px;background:#0b1222;min-height:320px;}
+    .carousel img{width:100%;display:block;border-radius:10px;opacity:0;visibility:hidden;position:absolute;left:0;top:0;transition:opacity 0.6s cubic-bezier(.4,0,.2,1), visibility 0.6s;}
+    .carousel img.active{opacity:1;visibility:visible;position:relative;z-index:1;}
+    .carousel .prev,.carousel .next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;padding:10px;cursor:pointer;border-radius:50%;font-size:22px;}
+    .carousel .prev{left:10px}
+    .carousel .next{right:10px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="image8.jpg" alt="Foto de perfil de Natan Henrique" class="avatar" style="object-fit:cover;width:72px;height:72px;border-radius:18px;box-shadow:var(--shadow);background:#1e293b;">
+        <div>
+          <h1 class="title">Natan Henrique</h1>
+          <div class="muted">Desenvolvimento de Sistemas • Engenharia de Software & IA</div>
+          <div class="links" style="margin-top:8px">
+            <a class="pill" href="mailto:natanhpena@gmail.com">natanhpena@gmail.com</a>
+            <span class="pill">(61) 9 9000-8866</span>
+            <span class="pill">Riacho Fundo I – Brasília/DF</span>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#competencias">Competências</a>
+        <a href="#experiencias">Experiências</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#linguagens">Linguagens</a>
+        <button id="printBtn" class="btn" aria-label="Imprimir ou salvar em PDF">🖨️ PDF</button>
+      </nav>
+    </header>
+
+    <section id="sobre" class="section grid grid-2">
+      <div class="card">
+        <h2>Sobre</h2>
+        <p><strong>Objetivo:</strong> primeira oportunidade no mercado de trabalho para aplicar e expandir meu aprendizado em <em>Desenvolvimento de Sistemas</em>, com responsabilidade e foco em qualidade.</p>
+        <p><strong>Resumo (Tecnologia):</strong> estudante do 3º ano do Ensino Médio no SESI Taguatinga (DF), trilha técnica em <strong>Desenvolvimento de Sistemas</strong> pelo SENAI Taguatinga. Conhecimentos em <strong>lógica de programação</strong>, <strong>banco de dados (MySQL)</strong>, <strong>back-end</strong> e em evolução em <strong>front-end</strong> e <strong>Python</strong>. Interesses em <strong>Engenharia de Software</strong> e <strong>Inteligência Artificial</strong>. Familiaridade com pacote Office (Word, Excel, PowerPoint).</p>
+        <p><strong>Perfil comportamental:</strong> empático e prestativo, colaboração em equipe, relações sociais positivas, responsabilidade com os estudos, resiliência, discrição e respeito ao próximo.</p>
+        <div class="chips" style="margin-top:12px">
+          <span class="chip tag"><span class="dot"></span>Engenharia de Software</span>
+          <span class="chip tag"><span class="dot"></span>Inteligência Artificial</span>
+          <span class="chip">Lógica de Programação</span>
+          <span class="chip">Banco de Dados</span>
+          <span class="chip">Back-end</span>
+          <span class="chip">Front-end (aprendendo)</span>
+          <span class="chip">Python (aprendendo)</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Links</h2>
+        <div class="grid">
+          <a class="btn" href="https://github.com/natan1144" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/natan-henrique-34b08930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+        <h3>Formação</h3>
+        <ul>
+          <li>3º ano do Ensino Médio – SESI Taguatinga/DF (cursando)</li>
+          <li>Itinerário Formativo: Técnico em Desenvolvimento de Sistemas – SENAI Taguatinga</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="competencias" class="section grid grid-2">
+      <div class="card">
+        <h2>Competências Técnicas</h2>
+        <div style="display:grid;gap:14px">
+          <div>
+            <div class="muted">Lógica de Programação</div>
+            <div class="bar" aria-label="nível"><span style="width:80%"></span></div>
+          </div>
+          <div>
+            <div class="muted">Banco de Dados (MySQL)</div>
+            <div class="bar"><span style="width:70%"></span></div>
+          </div>
+          <div>
+            <div class="muted">Back-end (noções)</div>
+            <div class="bar"><span style="width:60%"></span></div>
+          </div>
+          <div>
+            <div class="muted">Front-end (em aprendizado)</div>
+            <div class="bar"><span style="width:45%"></span></div>
+          </div>
+          <div>
+            <div class="muted">Python (em aprendizado)</div>
+            <div class="bar"><span style="width:40%"></span></div>
+          </div>
+          <div>
+            <div class="muted">Pacote Office (Word/Excel/PowerPoint)</div>
+            <div class="bar"><span style="width:75%"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Competências Socioemocionais</h2>
+        <div class="chips">
+          <span class="chip">Empatia</span>
+          <span class="chip">Colaboração</span>
+          <span class="chip">Comunicação</span>
+          <span class="chip">Responsabilidade</span>
+          <span class="chip">Resiliência</span>
+          <span class="chip">Discrição</span>
+          <span class="chip">Respeito</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencias" class="section">
+      <div class="card">
+        <h2>Experiências</h2>
+        <details class="accordion" open>
+          <summary><strong>Projetos Acadêmicos e Pessoais</strong> — Desenvolvimento de Sistemas</summary>
+          <div style="margin-top:8px" class="timeline">
+            <div class="item">
+              <div><strong>Atividades do SENAI</strong> — Exercícios de lógica, banco de dados, noções de back-end; protótipos front-end.</div>
+              <div class="muted">2024–2025 • Taguatinga/DF</div>
+            </div>
+            <div class="item">
+              <div><strong>Repositórios no GitHub</strong> — Estudos e experimentos. <a href="https://github.com/natan1144" target="_blank">Ver perfil</a></div>
+              <div class="muted">Contínuo</div>
+            </div>
+          </div>
+        </details>
+        <details class="accordion">
+          <summary><strong>Experiência Profissional</strong> — Em construção</summary>
+          <p class="muted">Buscando primeira oportunidade para estágio/trainee/júnior em desenvolvimento.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="cursos" class="section grid grid-2">
+      <div class="card">
+        <h2>Cursos e Trilhas</h2>
+        <ul>
+          <li>Técnico em Desenvolvimento de Sistemas — SENAI Taguatinga (itinerário formativo)</li>
+          <li>Ensino Médio — SESI Taguatinga (cursando)</li>
+        </ul>
+        <h3>Pacote Inclusão Profissional</h3>
+        <ul>
+          <li>Escrita Fiscal</li>
+          <li>Operador de Caixa</li>
+          <li>Crediário e Cobrança</li>
+          <li>Assistente Contábil</li>
+          <li>Departamento Pessoal</li>
+          <li>Marketing Pessoal (online)</li>
+          <li>Negociação Avançada (online)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Certificados</h2>
+        <div class="carousel">
+          <button class="prev" aria-label="Anterior">❮</button>
+          <button class="next" aria-label="Próximo">❯</button>
+          <img src="image1.jpeg" class="active" alt="Certificado 1">
+          <img src="image2.jpg" alt="Certificado 2">
+          <img src="image3.jpg" alt="Certificado 3">
+          <img src="image4.png" alt="Certificado 4">
+          <img src="image5.png" alt="Certificado 5">
+          <img src="image6.png" alt="Certificado 6">
+          <img src="image7.png" alt="Certificado 7">
+        </div>
+      </div>
+    </section>
+
+    <section id="linguagens" class="section grid grid-2">
+      <div class="card">
+        <h2>Linguagens (Programação)</h2>
+        <div class="chips">
+          <span class="chip">SQL / MySQL</span>
+          <span class="chip">JavaScript (básico)</span>
+          <span class="chip">Python (iniciando)</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Idiomas</h2>
+        <ul>
+          <li>Português — nativo</li>
+          <li>Inglês — básico</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h2>Contato</h2>
+        <p>Interessado em oportunidades de estágio/primeiro emprego? Entre em contato por <a href="mailto:natanhpena@gmail.com">e-mail</a> ou pelo <a href="https://www.linkedin.com/in/natan-henrique-34b08930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">LinkedIn</a>.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Natan Henrique • Construído com HTML, CSS e JavaScript</div>
+    </footer>
+  </div>
+
+  <script>
+    // Tema claro/escuro
+    const toggle = document.getElementById('themeToggle');
+    let light = false;
+    toggle.addEventListener('click', () => {
+      light = !light;
+      document.documentElement.style.setProperty('--bg', light ? '#f8fafc' : '#0f172a');
+      document.documentElement.style.setProperty('--card', light ? '#ffffff' : '#111827');
+      document.documentElement.style.setProperty('--text', light ? '#0f172a' : '#e5e7eb');
+      document.documentElement.style.setProperty('--muted', light ? '#334155' : '#94a3b8');
+      document.documentElement.style.setProperty('--chip', light ? '#f1f5f9' : '#1f2937');
+      document.documentElement.style.setProperty('--border', light ? '#e2e8f0' : '#1f2937');
+      toggle.textContent = light ? '🌞 Tema' : '🌙 Tema';
+    });
+
+    // Imprimir/Salvar PDF
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+    // Preenche ano
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Progresso animado das barras
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.bar>span').forEach(el => {
+        const w = el.getAttribute('style');
+        el.setAttribute('style', 'width:0');
+        setTimeout(() => el.setAttribute('style', w), 50);
+      });
+    });
+
+    // Carrossel de certificados
+    const imgs = document.querySelectorAll('.carousel img');
+    let index = 0;
+    function showSlide(i){
+      imgs.forEach(img=>img.classList.remove('active'));
+      imgs[i].classList.add('active');
+    }
+    document.querySelector('.next').addEventListener('click',()=>{
+      index = (index + 1) % imgs.length;
+      showSlide(index);
+    });
+    document.querySelector('.prev').addEventListener('click',()=>{
+      index = (index - 1 + imgs.length) % imgs.length;
+      showSlide(index);
+    });
+    setInterval(()=>{
+      index = (index + 1) % imgs.length;
+      showSlide(index);
+    },5000);
+
+    // Realce de navegação na rolagem
+    const links = [...document.querySelectorAll('nav a[href^="#"]')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const idx = sections.indexOf(entry.target);
+        if(idx >= 0){
+          const a = links[idx];
+          a.style.background = entry.isIntersecting ? 'linear-gradient(90deg, var(--accent), var(--accent-2))' : '#0b1222';
+          a.style.color = entry.isIntersecting ? '#0b1222' : 'var(--text)';
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => s && obs.observe(s));
+  </script>
+</body>
+</html>
