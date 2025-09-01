@@ -9,79 +9,139 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
-    :root{
-      --bg:#0f172a;
-      --card:#111827;
-      --muted:#94a3b8;
-      --text:#e5e7eb;
-      --accent:#22c55e;
-      --accent-2:#38bdf8;
-      --chip:#1f2937;
-      --border:#1f2937;
-      --shadow:0 10px 30px rgba(0,0,0,.3);
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --muted: #94a3b8;
+      --text: #e5e7eb;
+      --accent: #22c55e;
+      --accent-2: #38bdf8;
+      --chip: #1f2937;
+      --border: #1f2937;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .3);
     }
-    html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--text);} 
-    a{color:var(--accent-2); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    header{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;margin-bottom:18px}
-    .brand{display:flex;gap:16px;align-items:center}
-    .avatar{width:72px;height:72px;border-radius:18px;background:linear-gradient(145deg,#1e293b,#0b1222);display:grid;place-items:center;color:#a5b4fc;font-weight:800;box-shadow:var(--shadow);transition:transform 0.3s cubic-bezier(.4,0,.2,1),box-shadow 0.3s}
-    .avatar:hover{transform:scale(1.12);box-shadow:0 16px 40px rgba(0,0,0,.35)}
-    nav{display:flex;gap:10px;flex-wrap:wrap}
-    nav a{padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:#0b1222}
-    .btn{cursor:pointer; padding:10px 14px;border-radius:12px;border:1px solid var(--border); background:#0b1222;color:var(--text);display:inline-flex;align-items:center;gap:8px}
-    .btn:hover{filter:brightness(1.1)}
-    .grid{display:grid; gap:18px}
-    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
-    h1{font-size:28px;margin:0 0 4px 0}
-    h2{font-size:22px;margin:0 0 10px 0}
-    h3{font-size:16px;margin:14px 0 8px}
-    p{color:var(--text);opacity:.95;line-height:1.6}
-    .muted{color:var(--muted)}
-    .title{font-weight:800; letter-spacing:.2px}
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{background:var(--chip);border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px}
-    .bar{height:8px;background:#0b1222;border:1px solid var(--border);border-radius:999px;overflow:hidden}
-    .bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0}
-    .section{scroll-margin-top:100px}
-    .links{display:flex;flex-wrap:wrap;gap:10px}
-    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#0b1222;border:1px solid var(--border);border-radius:8px;padding:4px 8px;color:var(--muted)}
-    .tag{display:inline-flex;align-items:center;gap:8px}
-    .tag .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
-    .timeline{position:relative;padding-left:22px}
-    .timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:#1f2937}
-    .timeline .item{position:relative;margin-bottom:14px}
-    .timeline .item:before{content:"";position:absolute;left:-14px;top:6px;width:10px;height:10px;border-radius:999px;background:var(--accent)}
+    html, body { margin: 0; height: 100%; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial; background: var(--bg); color: var(--text); }
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 28px; }
+    header { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .brand { display: flex; gap: 16px; align-items: center; }
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1e293b, #0b1222);
+      display: grid;
+      place-items: center;
+      color: #a5b4fc;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s cubic-bezier(.4, 0, .2, 1), box-shadow 0.3s;
+      object-fit: cover;
+      margin-top: -12px;
+    }
+    .avatar:hover { transform: scale(1.12); box-shadow: 0 16px 40px rgba(0, 0, 0, .35); }
+    nav { display: flex; gap: 10px; flex-wrap: wrap; }
+    nav a { padding: 10px 14px; border: 1px solid var(--border); border-radius: 999px; background: #0b1222; }
+    .btn { cursor: pointer; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); background: #0b1222; color: var(--text); display: inline-flex; align-items: center; gap: 8px; }
+    .btn:hover { filter: brightness(1.1); }
+    .grid { display: grid; gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); }
+    h1 { font-size: 28px; margin: 0 0 4px 0; }
+    h2 { font-size: 22px; margin: 0 0 10px 0; }
+    h3 { font-size: 16px; margin: 14px 0 8px; }
+    p { color: var(--text); opacity: .95; line-height: 1.6; }
+    .muted { color: var(--muted); }
+    .title { font-weight: 800; letter-spacing: .2px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: var(--chip); border: 1px solid var(--border); padding: 6px 10px; border-radius: 999px; font-size: 12px; }
+    .bar { height: 8px; background: var(--chip); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+    .bar>span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0; }
+    .section { scroll-margin-top: 100px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill { border: 1px solid var(--border); background: #0b1222; padding: 6px 10px; border-radius: 999px; }
+    .timeline { position: relative; padding-left: 22px; }
+    .timeline:before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+    .timeline .item { position: relative; margin-bottom: 14px; }
+    .timeline .item:before { content: ""; position: absolute; left: -14px; top: 6px; width: 10px; height: 10px; border-radius: 999px; background: var(--accent); }
     .accordion summary{cursor:pointer;list-style:none}
     .accordion summary::-webkit-details-marker{display:none}
-    footer{margin:30px 0;color:var(--muted);text-align:center}
-    .pill{border:1px solid var(--border);background:#0b1222;padding:6px 10px;border-radius:999px;}
-    /* Carrossel */
-    .carousel{position:relative;max-width:600px;margin:18px auto 0;overflow:hidden;border-radius:10px;background:#0b1222;min-height:320px;}
-    .carousel img{width:100%;display:block;border-radius:10px;opacity:0;visibility:hidden;position:absolute;left:0;top:0;transition:opacity 0.6s cubic-bezier(.4,0,.2,1), visibility 0.6s;}
-    .carousel img.active{opacity:1;visibility:visible;position:relative;z-index:1;}
-    .carousel .prev,.carousel .next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;padding:10px;cursor:pointer;border-radius:50%;font-size:22px;}
-    .carousel .prev{left:10px}
-    .carousel .next{right:10px}
+    footer { margin: 30px 0; color: var(--muted); text-align: center; padding: 20px 10px; font-size: 14px; }
+    .carousel { position: relative; max-width: 600px; margin: 18px auto 0; overflow: hidden; border-radius: 10px; background: #0b1222; min-height: 220px; max-height: 360px; height: 360px; }
+    .carousel img { width: 100%; border-radius: 10px; opacity: 0; visibility: hidden; position: absolute; left: 0; top: 0; transition: opacity 0.6s; max-height: 360px; height: 100%; object-fit: contain; }
+    .carousel img.active { opacity: 1; visibility: visible; position: absolute; z-index: 1; }
+    .carousel .prev, .carousel .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: #fff; border: none; padding: 10px; cursor: pointer; border-radius: 50%; font-size: 22px; z-index: 2; }
+    .carousel .prev { left: 10px; }
+    .carousel .next { right: 10px; }
+    
+    @media(max-width: 900px) { 
+        .grid-2 { 
+            grid-template-columns: 1fr; 
+        } 
+    }
+    
+    @media(max-width: 768px) {
+      .container {
+        padding: 20px 16px;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .brand {
+        width: 100%;
+        align-items: flex-start; 
+      }
+      
+      .avatar {
+        width: 64px;
+        height: 64px;
+        margin-top: 0;
+      }
+      
+      .links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      nav {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 8px;
+      }
+
+      nav a, .btn {
+        width: 90%;
+        text-align: center;
+        padding: 12px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div class="brand">
-        <img src="image8.jpg" alt="Foto de perfil de Natan Henrique" class="avatar" style="object-fit:cover;width:72px;height:72px;border-radius:18px;box-shadow:var(--shadow);background:#1e293b;">
+        <img src="image8.jpg" alt="Foto de perfil de Natan Henrique" class="avatar" id="profile-pic">
         <div>
-          <h1 class="title">Natan Henrique</h1>
-          <div class="muted">Desenvolvimento de Sistemas • Engenharia de Software & IA</div>
+          <h1 id="pdf-name" class="title">Natan Henrique</h1>
+          <div id="pdf-subtitle" class="muted">Desenvolvimento de Sistemas • Engenharia de Software & IA</div>
           <div class="links" style="margin-top:8px">
-            <a class="pill" href="mailto:natanhpena@gmail.com">natanhpena@gmail.com</a>
-            <span class="pill">(61) 9 9000-8866</span>
-            <span class="pill">Riacho Fundo I – Brasília/DF</span>
+            <span id="pdf-email" class="pill">natanhpena@gmail.com</span>
+            <span id="pdf-phone" class="pill">(61) 9 9000-8866</span>
+            <span id="pdf-location" class="pill">Riacho Fundo I – Brasília/DF</span>
           </div>
         </div>
       </div>
@@ -91,34 +151,27 @@
         <a href="#experiencias">Experiências</a>
         <a href="#cursos">Cursos</a>
         <a href="#linguagens">Linguagens</a>
-        <button id="printBtn" class="btn" aria-label="Imprimir ou salvar em PDF">🖨️ PDF</button>
+        <button id="downloadPdfBtn" class="btn" aria-label="Baixar PDF"><i class="fa fa-download"></i> Baixar PDF</button>
       </nav>
     </header>
 
     <section id="sobre" class="section grid grid-2">
       <div class="card">
         <h2>Sobre</h2>
-        <p><strong>Objetivo:</strong> primeira oportunidade no mercado de trabalho para aplicar e expandir meu aprendizado em <em>Desenvolvimento de Sistemas</em>, com responsabilidade e foco em qualidade.</p>
-        <p><strong>Resumo (Tecnologia):</strong> estudante do 3º ano do Ensino Médio no SESI Taguatinga (DF), trilha técnica em <strong>Desenvolvimento de Sistemas</strong> pelo SENAI Taguatinga. Conhecimentos em <strong>lógica de programação</strong>, <strong>banco de dados (MySQL)</strong>, <strong>back-end</strong> e em evolução em <strong>front-end</strong> e <strong>Python</strong>. Interesses em <strong>Engenharia de Software</strong> e <strong>Inteligência Artificial</strong>. Familiaridade com pacote Office (Word, Excel, PowerPoint).</p>
-        <p><strong>Perfil comportamental:</strong> empático e prestativo, colaboração em equipe, relações sociais positivas, responsabilidade com os estudos, resiliência, discrição e respeito ao próximo.</p>
-        <div class="chips" style="margin-top:12px">
-          <span class="chip tag"><span class="dot"></span>Engenharia de Software</span>
-          <span class="chip tag"><span class="dot"></span>Inteligência Artificial</span>
-          <span class="chip">Lógica de Programação</span>
-          <span class="chip">Banco de Dados</span>
-          <span class="chip">Back-end</span>
-          <span class="chip">Front-end (aprendendo)</span>
-          <span class="chip">Python (aprendendo)</span>
+        <div id="pdf-sobre">
+          <p><strong>Objetivo:</strong> primeira oportunidade no mercado de trabalho para aplicar e expandir meu aprendizado em <em>Desenvolvimento de Sistemas</em>, com responsabilidade e foco em qualidade.</p>
+          <p><strong>Resumo (Tecnologia):</strong> estudante do 3º ano do Ensino Médio no SESI Taguatinga (DF), trilha técnica em <strong>Desenvolvimento de Sistemas</strong> pelo SENAI Taguatinga. Conhecimentos em <strong>lógica de programação</strong>, <strong>banco de dados (MySQL)</strong>, <strong>back-end</strong> e em evolução em <strong>front-end</strong> e <strong>Python</strong>. Interesses em <strong>Engenharia de Software</strong> e <strong>Inteligência Artificial</strong>. Familiaridade com pacote Office (Word, Excel, PowerPoint).</p>
+          <p><strong>Perfil comportamental:</strong> empático e prestativo, colaboração em equipe, relações sociais positivas, responsabilidade com os estudos, resiliência, discrição e respeito ao próximo.</p>
         </div>
       </div>
       <div class="card">
         <h2>Links</h2>
         <div class="grid">
-          <a class="btn" href="https://github.com/natan1144" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/natan-henrique-34b08930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a id="pdf-github-link" class="btn" href="https://github.com/natan1144" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+          <a id="pdf-linkedin-link" class="btn" href="https://www.linkedin.com/in/natan-henrique-34b08930a" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
-        <h3>Formação</h3>
-        <ul>
+        <h3 id="pdf-formacao-title">Formação</h3>
+        <ul id="pdf-formacao-list">
           <li>3º ano do Ensino Médio – SESI Taguatinga/DF (cursando)</li>
           <li>Itinerário Formativo: Técnico em Desenvolvimento de Sistemas – SENAI Taguatinga</li>
         </ul>
@@ -128,30 +181,30 @@
     <section id="competencias" class="section grid grid-2">
       <div class="card">
         <h2>Competências Técnicas</h2>
-        <div style="display:grid;gap:14px">
+        <div id="pdf-competencias" style="display:grid;gap:14px">
           <div>
             <div class="muted">Lógica de Programação</div>
-            <div class="bar" aria-label="nível"><span style="width:80%"></span></div>
+            <div class="bar" data-value="80"><span style="width:80%"></span></div>
           </div>
           <div>
             <div class="muted">Banco de Dados (MySQL)</div>
-            <div class="bar"><span style="width:70%"></span></div>
+            <div class="bar" data-value="70"><span style="width:70%"></span></div>
           </div>
           <div>
             <div class="muted">Back-end (noções)</div>
-            <div class="bar"><span style="width:60%"></span></div>
+            <div class="bar" data-value="60"><span style="width:60%"></span></div>
           </div>
           <div>
             <div class="muted">Front-end (em aprendizado)</div>
-            <div class="bar"><span style="width:45%"></span></div>
+            <div class="bar" data-value="45"><span style="width:45%"></span></div>
           </div>
           <div>
             <div class="muted">Python (em aprendizado)</div>
-            <div class="bar"><span style="width:40%"></span></div>
+            <div class="bar" data-value="40"><span style="width:40%"></span></div>
           </div>
           <div>
             <div class="muted">Pacote Office (Word/Excel/PowerPoint)</div>
-            <div class="bar"><span style="width:75%"></span></div>
+            <div class="bar" data-value="75"><span style="width:75%"></span></div>
           </div>
         </div>
       </div>
@@ -172,35 +225,37 @@
     <section id="experiencias" class="section">
       <div class="card">
         <h2>Experiências</h2>
-        <details class="accordion" open>
-          <summary><strong>Projetos Acadêmicos e Pessoais</strong> — Desenvolvimento de Sistemas</summary>
-          <div style="margin-top:8px" class="timeline">
-            <div class="item">
-              <div><strong>Atividades do SENAI</strong> — Exercícios de lógica, banco de dados, noções de back-end; protótipos front-end.</div>
-              <div class="muted">2024–2025 • Taguatinga/DF</div>
+        <div id="pdf-experiencias">
+          <details class="accordion" open>
+            <summary><strong>Projetos Acadêmicos e Pessoais</strong> — Desenvolvimento de Sistemas</summary>
+            <div style="margin-top:8px" class="timeline">
+              <div class="item">
+                <div><strong>Atividades do SENAI</strong> — Exercícios de lógica, banco de dados, noções de back-end; protótipos front-end.</div>
+                <div class="muted">2024–2025 • Taguatinga/DF</div>
+              </div>
+              <div class="item">
+                <div><strong>Repositórios no GitHub</strong> — Estudos e experimentos. <a href="https://github.com/natan1144" target="_blank">Ver perfil</a></div>
+                <div class="muted">Contínuo</div>
+              </div>
             </div>
-            <div class="item">
-              <div><strong>Repositórios no GitHub</strong> — Estudos e experimentos. <a href="https://github.com/natan1144" target="_blank">Ver perfil</a></div>
-              <div class="muted">Contínuo</div>
-            </div>
-          </div>
-        </details>
-        <details class="accordion">
-          <summary><strong>Experiência Profissional</strong> — Em construção</summary>
-          <p class="muted">Buscando primeira oportunidade para estágio/trainee/júnior em desenvolvimento.</p>
-        </details>
+          </details>
+          <details class="accordion">
+            <summary><strong>Experiência Profissional</strong> — Em construção</summary>
+            <p class="muted">Buscando primeira oportunidade para estágio/trainee/júnior em desenvolvimento.</p>
+          </details>
+        </div>
       </div>
     </section>
 
     <section id="cursos" class="section grid grid-2">
       <div class="card">
-        <h2>Cursos e Trilhas</h2>
-        <ul>
+        <h2 id="pdf-cursos-title">Cursos e Trilhas</h2>
+        <ul id="pdf-cursos-list">
           <li>Técnico em Desenvolvimento de Sistemas — SENAI Taguatinga (itinerário formativo)</li>
           <li>Ensino Médio — SESI Taguatinga (cursando)</li>
         </ul>
-        <h3>Pacote Inclusão Profissional</h3>
-        <ul>
+        <h3 id="pdf-inclusao-title">Pacote Inclusão Profissional</h3>
+        <ul id="pdf-inclusao-list">
           <li>Escrita Fiscal</li>
           <li>Operador de Caixa</li>
           <li>Crediário e Cobrança</li>
@@ -215,13 +270,13 @@
         <div class="carousel">
           <button class="prev" aria-label="Anterior">❮</button>
           <button class="next" aria-label="Próximo">❯</button>
-          <img src="image1.jpeg" class="active" alt="Certificado 1">
-          <img src="image2.jpg" alt="Certificado 2">
-          <img src="image3.jpg" alt="Certificado 3">
-          <img src="image4.png" alt="Certificado 4">
-          <img src="image5.png" alt="Certificado 5">
-          <img src="image6.png" alt="Certificado 6">
-          <img src="image7.png" alt="Certificado 7">
+          <img src="image1.jpeg" class="active" alt="Certificado Inclusão Profissional" data-title="Inclusão Profissional">
+          <img src="image2.jpg" alt="Certificado Hardware" data-title="Hardware - Curso em Vídeo">
+          <img src="image3.jpg" alt="Certificado Marketing Pessoal" data-title="Marketing Pessoal">
+          <img src="image4.png" alt="Certificado Python Ada Tech" data-title="Python - Ada Tech">
+          <img src="image5.png" alt="Certificado HTML5 e CSS3" data-title="HTML5 e CSS3 - Curso em Vídeo">
+          <img src="image6.png" alt="Certificado Algoritmo" data-title="Algoritmo - Curso em Vídeo">
+          <img src="image7.png" alt="Certificado Técnico em Dev. Sistemas" data-title="Técnico em Dev. Sistemas">
         </div>
       </div>
     </section>
@@ -229,7 +284,7 @@
     <section id="linguagens" class="section grid grid-2">
       <div class="card">
         <h2>Linguagens (Programação)</h2>
-        <div class="chips">
+        <div id="pdf-linguagens" class="chips">
           <span class="chip">SQL / MySQL</span>
           <span class="chip">JavaScript (básico)</span>
           <span class="chip">Python (iniciando)</span>
@@ -238,8 +293,8 @@
         </div>
       </div>
       <div class="card">
-        <h2>Idiomas</h2>
-        <ul>
+        <h2 id="pdf-idiomas-title">Idiomas</h2>
+        <ul id="pdf-idiomas-list">
           <li>Português — nativo</li>
           <li>Inglês — básico</li>
         </ul>
@@ -249,72 +304,350 @@
     <section class="section">
       <div class="card">
         <h2>Contato</h2>
-        <p>Interessado em oportunidades de estágio/primeiro emprego? Entre em contato por <a href="mailto:natanhpena@gmail.com">e-mail</a> ou pelo <a href="https://www.linkedin.com/in/natan-henrique-34b08930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">LinkedIn</a>.</p>
+        <p>Interessado em oportunidades de estágio/primeiro emprego? Entre em contato por <a href="mailto:natanhpena@gmail.com">e-mail</a> ou pelo <a href="https://www.linkedin.com/in/natan-henrique-34b08930a" target="_blank">LinkedIn</a>.</p>
       </div>
     </section>
 
     <footer>
       <div>© <span id="year"></span> Natan Henrique • Construído com HTML, CSS e JavaScript</div>
     </footer>
-  </div>
 
+  </div>
   <script>
-    // Tema claro/escuro
-    const toggle = document.getElementById('themeToggle');
-    let light = false;
-    toggle.addEventListener('click', () => {
-      light = !light;
-      document.documentElement.style.setProperty('--bg', light ? '#f8fafc' : '#0f172a');
-      document.documentElement.style.setProperty('--card', light ? '#ffffff' : '#111827');
-      document.documentElement.style.setProperty('--text', light ? '#0f172a' : '#e5e7eb');
-      document.documentElement.style.setProperty('--muted', light ? '#334155' : '#94a3b8');
-      document.documentElement.style.setProperty('--chip', light ? '#f1f5f9' : '#1f2937');
-      document.documentElement.style.setProperty('--border', light ? '#e2e8f0' : '#1f2937');
-      toggle.textContent = light ? '🌞 Tema' : '🌙 Tema';
+    document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+      const btn = this;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Gerando...';
+
+      // --- NOVA LÓGICA PARA CARREGAR A FOTO DE PERFIL ---
+      const profilePicImg = document.getElementById('profile-pic');
+      const profilePic = new Image();
+      profilePic.crossOrigin = "Anonymous";
+      
+      profilePic.onload = function() {
+        // A função que cria o PDF só roda DEPOIS que a imagem carregou
+        generatePdf(profilePic); 
+      };
+      
+      profilePic.onerror = function() {
+        console.error("Não foi possível carregar a foto de perfil.");
+        // Mesmo se a foto falhar, gera o PDF sem ela
+        generatePdf(null); 
+      };
+      
+      profilePic.src = profilePicImg.src;
+
+      async function generatePdf(profileImage) {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        const margin = 20;
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const contentWidth = pageWidth - (margin * 2);
+        let y = 25;
+
+        function checkPageBreak() {
+          if (y > 270) {
+            pdf.addPage();
+            y = 25;
+          }
+        }
+
+        function addSectionTitle(title) {
+          checkPageBreak();
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(14);
+          pdf.setTextColor('#111827');
+          pdf.text(title.toUpperCase(), margin, y);
+          pdf.setDrawColor('#d1d5db');
+          pdf.line(margin, y + 2, pageWidth - margin, y + 2);
+          y += 10;
+        }
+        
+        function addParagraphs(element) {
+          const paragraphs = element.querySelectorAll('p');
+          paragraphs.forEach(p => {
+              checkPageBreak();
+              pdf.setFont('helvetica', 'normal');
+              pdf.setFontSize(10);
+              pdf.setTextColor('#374151');
+              const text = p.innerText.replace(/\s+/g, ' ').trim();
+              const splitText = pdf.splitTextToSize(text, contentWidth);
+              
+              if (y + (splitText.length * 5) > 280) {
+                  pdf.addPage();
+                  y = 25;
+              }
+
+              pdf.text(splitText, margin, y);
+              y += (splitText.length * 5) + 3;
+          });
+        }
+
+        function addList(listElement) {
+          const items = listElement.querySelectorAll('li');
+          items.forEach(item => {
+              checkPageBreak();
+              pdf.setFont('helvetica', 'normal');
+              pdf.setFontSize(10);
+              pdf.setTextColor('#374151');
+              const text = `•  ${item.innerText}`;
+              const splitText = pdf.splitTextToSize(text, contentWidth - 3);
+              pdf.text(splitText, margin + 3, y);
+              y += (splitText.length * 5) + 2;
+          });
+        }
+        
+        // --- INÍCIO DA CONSTRUÇÃO DO PDF ---
+        
+        // 1. CABEÇALHO COM FOTO
+        if (profileImage) {
+          // Cria um canvas para imagem quadrada com bordas arredondadas e nítida
+          const imgSize = 25;
+          const imgX = pageWidth - margin - imgSize;
+          const imgY = y - 5;
+          const canvas = document.createElement('canvas');
+          canvas.width = imgSize * 4;
+          canvas.height = imgSize * 4;
+          const ctx = canvas.getContext('2d');
+          // Desenha retângulo arredondado
+          const radius = 24;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(radius, 0);
+          ctx.lineTo(canvas.width - radius, 0);
+          ctx.quadraticCurveTo(canvas.width, 0, canvas.width, radius);
+          ctx.lineTo(canvas.width, canvas.height - radius);
+          ctx.quadraticCurveTo(canvas.width, canvas.height, canvas.width - radius, canvas.height);
+          ctx.lineTo(radius, canvas.height);
+          ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - radius);
+          ctx.lineTo(0, radius);
+          ctx.quadraticCurveTo(0, 0, radius, 0);
+          ctx.closePath();
+          ctx.clip();
+          ctx.drawImage(profileImage, 0, 0, canvas.width, canvas.height);
+          ctx.restore();
+          // Adiciona borda arredondada
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(radius, 0);
+          ctx.lineTo(canvas.width - radius, 0);
+          ctx.quadraticCurveTo(canvas.width, 0, canvas.width, radius);
+          ctx.lineTo(canvas.width, canvas.height - radius);
+          ctx.quadraticCurveTo(canvas.width, canvas.height, canvas.width - radius, canvas.height);
+          ctx.lineTo(radius, canvas.height);
+          ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - radius);
+          ctx.lineTo(0, radius);
+          ctx.quadraticCurveTo(0, 0, radius, 0);
+          ctx.closePath();
+          ctx.lineWidth = 8;
+          ctx.strokeStyle = "#e5e7eb";
+          ctx.stroke();
+          ctx.restore();
+          // Adiciona imagem quadrada com bordas arredondadas ao PDF
+          const roundedImg = canvas.toDataURL('image/png');
+          pdf.addImage(roundedImg, 'PNG', imgX, imgY, imgSize, imgSize);
+        }
+
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(28);
+        pdf.setTextColor('#000000');
+        pdf.text(document.getElementById('pdf-name').textContent, margin, y);
+        y += 8;
+
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(11);
+        pdf.setTextColor('#4b5563');
+        pdf.text(document.getElementById('pdf-subtitle').textContent, margin, y);
+        y += 5;
+        pdf.text(`${document.getElementById('pdf-email').textContent} • ${document.getElementById('pdf-phone').textContent} • ${document.getElementById('pdf-location').textContent}`, margin, y);
+        y += 5;
+
+        const githubLink = document.getElementById('pdf-github-link');
+        const linkedinLink = document.getElementById('pdf-linkedin-link');
+        pdf.setFontSize(11);
+        pdf.setTextColor('#0369a1');
+        pdf.textWithLink('GitHub', margin, y, { url: githubLink.href });
+        pdf.textWithLink('LinkedIn', margin + 18, y, { url: linkedinLink.href });
+        y += 12;
+        
+        addSectionTitle('Sobre');
+        addParagraphs(document.getElementById('pdf-sobre'));
+        y += 5;
+        
+        addSectionTitle('Experiências');
+        // ... (resto do código para adicionar seções continua igual)
+        const experiences = document.getElementById('pdf-experiencias').querySelectorAll('details');
+        experiences.forEach(exp => {
+          checkPageBreak();
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(11);
+          pdf.setTextColor('#1f2937');
+          const summaryText = exp.querySelector('summary').innerText;
+          pdf.text(summaryText, margin, y);
+          y += 6;
+          
+          const items = exp.querySelectorAll('.item');
+          if(items.length > 0) {
+              items.forEach(item => {
+                  const mainText = `•  ${item.children[0].innerText}`;
+                  const metaText = item.children[1].innerText;
+                  const splitMain = pdf.splitTextToSize(mainText, contentWidth - 3);
+                  pdf.setFont('helvetica', 'normal');
+                  pdf.setFontSize(10);
+                  pdf.setTextColor('#374151');
+                  pdf.text(splitMain, margin + 3, y);
+                  y += (splitMain.length * 5);
+
+                  pdf.setFontSize(9);
+                  pdf.setTextColor('#6b7280');
+                  pdf.text(metaText, margin + 5, y);
+                  y += 6;
+              });
+          } else {
+              const p = exp.querySelector('p');
+              if (p) {
+                  addList({ querySelectorAll: () => [ { innerText: p.innerText } ] });
+              }
+          }
+        });
+        y += 5;
+
+        addSectionTitle('Competências Técnicas');
+        const competencias = document.getElementById('pdf-competencias').children;
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(10);
+        for (let comp of competencias) {
+          checkPageBreak();
+          const label = comp.querySelector('.muted').textContent;
+          const value = parseInt(comp.querySelector('.bar').getAttribute('data-value'));
+          
+          pdf.setTextColor('#374151');
+          pdf.text(label, margin, y);
+          
+          const barWidth = 80;
+          const barX = pageWidth - margin - barWidth;
+          pdf.setDrawColor('#e5e7eb');
+          pdf.setFillColor('#e5e7eb');
+          pdf.rect(barX, y - 3.5, barWidth, 4, 'FD');
+          
+          pdf.setDrawColor('#1d4ed8');
+          pdf.setFillColor('#1d4ed8');
+          pdf.rect(barX, y - 3.5, barWidth * (value / 100), 4, 'FD');
+          y += 8;
+        }
+        y += 5;
+
+        addSectionTitle(document.getElementById('pdf-formacao-title').textContent);
+        addList(document.getElementById('pdf-formacao-list'));
+        y += 5;
+        
+        addSectionTitle(document.getElementById('pdf-cursos-title').textContent);
+        addList(document.getElementById('pdf-cursos-list'));
+        y += 5;
+        addSectionTitle(document.getElementById('pdf-inclusao-title').textContent);
+        addList(document.getElementById('pdf-inclusao-list'));
+        y += 5;
+        
+        addSectionTitle(document.getElementById('pdf-idiomas-title').textContent);
+        addList(document.getElementById('pdf-idiomas-list'));
+        y += 5;
+
+        // PÁGINA DE CERTIFICADOS
+        pdf.addPage();
+        y = 25;
+        addSectionTitle('Certificados');
+        const certImages = Array.from(document.querySelectorAll('.carousel img'));
+        // ... (código dos certificados continua igual)
+
+        try {
+            const loadedCerts = await Promise.all(certImages.map(img => {
+                return new Promise((resolve, reject) => {
+                    const image = new Image();
+                    image.crossOrigin = "Anonymous";
+                    image.onload = () => resolve({ image, title: img.dataset.title });
+                    image.onerror = reject;
+                    image.src = img.src;
+                });
+            }));
+            
+            let x = margin;
+            const imgWidth = (contentWidth - 10) / 2;
+            const imgHeight = imgWidth * 0.707;
+
+            for (let i = 0; i < loadedCerts.length; i++) {
+                const cert = loadedCerts[i];
+                if (y + imgHeight + 15 > pdf.internal.pageSize.getHeight()) {
+                    pdf.addPage();
+                    y = 25;
+                    addSectionTitle('Certificados (continuação)');
+                }
+                pdf.addImage(cert.image, 'PNG', x, y, imgWidth, imgHeight);
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(8);
+                pdf.setTextColor('#4b5563');
+                pdf.text(cert.title, x, y + imgHeight + 4);
+
+                if ((i + 1) % 2 === 0) {
+                    x = margin;
+                    y += imgHeight + 15;
+                } else {
+                    x += imgWidth + 10;
+                }
+            }
+        } catch(e) {
+            console.error("Erro ao carregar imagens dos certificados:", e);
+            pdf.text("Erro ao carregar imagens dos certificados.", margin, y);
+        }
+        
+        pdf.save('curriculo-natan-henrique-com-foto.pdf');
+        
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa fa-download"></i> Baixar PDF';
+      }
     });
 
-    // Imprimir/Salvar PDF
-    document.getElementById('printBtn').addEventListener('click', () => window.print());
-
-    // Preenche ano
+    // Scripts para a página web funcionar (sem alterações)
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Progresso animado das barras
     requestAnimationFrame(() => {
       document.querySelectorAll('.bar>span').forEach(el => {
-        const w = el.getAttribute('style');
-        el.setAttribute('style', 'width:0');
-        setTimeout(() => el.setAttribute('style', w), 50);
+        const w = el.style.width;
+        el.style.width = '0';
+        setTimeout(() => el.style.width = w, 50);
       });
     });
-
-    // Carrossel de certificados
     const imgs = document.querySelectorAll('.carousel img');
     let index = 0;
-    function showSlide(i){
-      imgs.forEach(img=>img.classList.remove('active'));
-      imgs[i].classList.add('active');
+    function showSlide(i) {
+        if(imgs.length > 0) {
+            imgs.forEach(img => img.classList.remove('active'));
+            imgs[i].classList.add('active');
+        }
     }
-    document.querySelector('.next').addEventListener('click',()=>{
-      index = (index + 1) % imgs.length;
-      showSlide(index);
-    });
-    document.querySelector('.prev').addEventListener('click',()=>{
-      index = (index - 1 + imgs.length) % imgs.length;
-      showSlide(index);
-    });
-    setInterval(()=>{
-      index = (index + 1) % imgs.length;
-      showSlide(index);
-    },5000);
-
-    // Realce de navegação na rolagem
+    const nextBtn = document.querySelector('.next');
+    const prevBtn = document.querySelector('.prev');
+    if(nextBtn && prevBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (imgs.length > 0) index = (index + 1) % imgs.length;
+            showSlide(index);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (imgs.length > 0) index = (index - 1 + imgs.length) % imgs.length;
+            showSlide(index);
+        });
+    }
+    if(imgs.length > 1) {
+        setInterval(() => {
+            if (imgs.length > 0) index = (index + 1) % imgs.length;
+            showSlide(index);
+        }, 5000);
+    }
     const links = [...document.querySelectorAll('nav a[href^="#"]')];
     const sections = links.map(a => document.querySelector(a.getAttribute('href')));
     const obs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         const idx = sections.indexOf(entry.target);
-        if(idx >= 0){
+        if (idx >= 0) {
           const a = links[idx];
           a.style.background = entry.isIntersecting ? 'linear-gradient(90deg, var(--accent), var(--accent-2))' : '#0b1222';
           a.style.color = entry.isIntersecting ? '#0b1222' : 'var(--text)';
